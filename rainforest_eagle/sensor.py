@@ -66,6 +66,6 @@ class Eagle(Entity):
 
     def update(self):
         '''Get the energy demand from the Rainforest Eagle'''
-        from .eagle200 import EagleReader
+        from .eagle200_reader import EagleReader
 		
         self._state = getattr(EagleReader(self._ip_address, self._cloud_id, self._install_code), self._type)()
