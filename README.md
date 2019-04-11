@@ -10,7 +10,7 @@ Creates the following components:
 <pre>
 sensor:
   - platform: rainforest_eagle
-    ip_address: ip_address
-    cloud_id: CLOUD_ID
-    install_code: INSTALL_CODE
+    ip_address: 1.1.1.2
+    cloud_id: 123456
+    install_code: 4234343242343242
 </pre>
