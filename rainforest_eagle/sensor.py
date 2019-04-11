@@ -7,18 +7,20 @@ from homeassistant.helpers.entity import Entity
 from homeassistant.components.sensor import PLATFORM_SCHEMA
 import homeassistant.helpers.config_validation as cv
 from homeassistant.const import (
-    CONF_IP_ADDRESS, CONF_MONITORED_CONDITIONS, POWER_WATT)
+    CONF_IP_ADDRESS, CONF_MONITORED_CONDITIONS, ENERGY_KILO_WATT_HOUR)
 
+CONF_CLOUD_ID = 'cloud_id'
+CONF_INSTALL_CODE = 'install_code'
+POWER_KILO_WATT = 'kW'
 
 #REQUIREMENTS = ['eagle_reader==0.1']
 _LOGGER = logging.getLogger(__name__)
 
 SENSORS = {
-    "instantanous_demand": ("Eagle-200 Energy Demand", POWER_WATT)
+    "instantanous_demand": ("Eagle-200 Meter Power Demand", POWER_KILO_WATT),
+    "summation_delivered": ("Eagle-200 Total Meter Energy Delivered", ENERGY_KILO_WATT_HOUR),
+    "summation_received": ("Eagle-200 Total Meter Energy Received", ENERGY_KILO_WATT_HOUR)
 	}
-
-CONF_CLOUD_ID = 'cloud_id'
-CONF_INSTALL_CODE = 'install_code'
 	
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_IP_ADDRESS): cv.string,
@@ -35,24 +37,26 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     install_code = config[CONF_INSTALL_CODE]
     monitored_conditions = config[CONF_MONITORED_CONDITIONS]
     for condition in monitored_conditions:
-        add_devices([Eagle(ip_address, cloud_id, install_code, condition)])
+        add_devices([Eagle(ip_address, cloud_id, install_code, condition,
+                           SENSORS[condition][0], SENSORS[condition][1])])
 
 class Eagle(Entity):
     """Implementation of the Rainforest Eagle-200 sensor."""
 
-    def __init__(self, ip_address, cloud_id, install_code, sensor_type):
+    def __init__(self, ip_address, cloud_id, install_code, sensor_type, name, unit):
         """Initialize the sensor."""
         self._ip_address = ip_address
         self._cloud_id = cloud_id
         self._install_code = install_code
         self._type = sensor_type
-        self._unit_of_measurement = POWER_WATT
+        self._name = name
+        self._unit_of_measurement = unit
         self._state = None
 
     @property
     def name(self):
         """Return the name of the sensor."""
-        return 'Eagle-200'
+        return self._name
 
     @property
     def state(self):
@@ -62,7 +66,7 @@ class Eagle(Entity):
     @property
     def unit_of_measurement(self):
         """Return the unit of measurement."""
-        return POWER_WATT
+        return self._unit_of_measurement
 
     def update(self):
         '''Get the energy demand from the Rainforest Eagle'''
