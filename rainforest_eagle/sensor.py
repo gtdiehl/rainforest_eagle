@@ -19,7 +19,8 @@ _LOGGER = logging.getLogger(__name__)
 SENSORS = {
     "instantanous_demand": ("Eagle-200 Meter Power Demand", POWER_KILO_WATT),
     "summation_delivered": ("Eagle-200 Total Meter Energy Delivered", ENERGY_KILO_WATT_HOUR),
-    "summation_received": ("Eagle-200 Total Meter Energy Received", ENERGY_KILO_WATT_HOUR)
+    "summation_received": ("Eagle-200 Total Meter Energy Received", ENERGY_KILO_WATT_HOUR),
+    "summation_total": ("Eagle-200 Net Meter Energy (Delivered minus Received)", ENERGY_KILO_WATT_HOUR)
 	}
 	
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
