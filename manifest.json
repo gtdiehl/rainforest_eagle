@@ -6,5 +6,5 @@
     "eagle200_reader >= 0.1.0"
   ],
   "dependencies": [],
-  "codeowners": [@gregtd]
+  "codeowners": ["@gregtd"]
 }
