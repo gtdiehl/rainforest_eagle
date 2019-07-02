@@ -13,7 +13,6 @@ CONF_CLOUD_ID = 'cloud_id'
 CONF_INSTALL_CODE = 'install_code'
 POWER_KILO_WATT = 'kW'
 
-#REQUIREMENTS = ['eagle_reader==0.1']
 _LOGGER = logging.getLogger(__name__)
 
 SENSORS = {
