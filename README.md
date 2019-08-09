@@ -1,3 +1,5 @@
+<h2>Please note this has been merged in to Home Assistant v0.97 and will be updated in that repository only from now on.</h2>
+
 <h1>Rainforest Eagle</h1>
 <h2>Description</h2>
 Rainforest Eagle-200 Component for Home Assistant
