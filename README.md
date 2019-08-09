@@ -1,4 +1,4 @@
-<h2>Please note this has been merged in to Home Assistant v0.97 and will be updated in that repository only from now on.</h2>
+**Please note this has been merged in to Home Assistant v0.97 and will be updated in that [repository](https://github.com/home-assistant/home-assistant/tree/dev/homeassistant/components/rainforest_eagle) only from now on.**
 
 <h1>Rainforest Eagle</h1>
 <h2>Description</h2>
